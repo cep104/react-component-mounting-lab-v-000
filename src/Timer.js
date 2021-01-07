@@ -3,9 +3,18 @@ import React, { Component } from "react";
 class Timer extends Component {
   state = {
     time: 0,
-    color: "#" + Math.floor(Math.random() * 16777215).toString(16)
+    color: "#" + Math.floor(Math.random() * 16777215).toString(16),
   };
+  componentDidMount() {
+    this.interval = setInterval(this.clockTick, 1000);
+    //set the interval as a variable, and use setInterval to call the clockTick function and give it a time of 1000
+    //look at the readme for this lab for these instructions
+  }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    //use the function clearInterval which will stop whatever you put in it. in this case it will be the variable we used in componentDidMount this.interval.
+  }
   // add your code here
 
   render() {
@@ -22,8 +31,8 @@ class Timer extends Component {
 
   //clock functions
   clockTick = () => {
-    this.setState(prevState => ({
-      time: prevState.time + 1
+    this.setState((prevState) => ({
+      time: prevState.time + 1,
     }));
   };
 
